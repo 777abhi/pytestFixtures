@@ -1,23 +1,22 @@
 from mydb import MyDB
 
-conn = None
-cur = None
+import pytest
 
-def setup_module(module):
-    global conn
-    global cur
+@pytest.fixture(scope="module")
+def cur():
+    print("setting up")
     db = MyDB()
     conn = db.connect("server")
-    cur = conn.Cursor()
-
-def teardown_modulw(module):
-    cur.close()
+    curs = conn.Cursor()
+    yield curs
+    curs.close()
     conn.close()
-    
-def test_something():
+    print("closing")
+
+def test_something(cur):
     id = cur.execute("1")
     assert id == 123
 
-def test_something2():
+def test_something2(cur):
     id = cur.execute("2")
     assert id == 321
