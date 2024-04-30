@@ -103,3 +103,59 @@ Type casting is used in programming to ensure that variables are processed in a 
      ```
 
 These examples illustrate how type casting is used to convert data types to ensure proper handling and processing of variables in different programming scenarios¹[1]²[2]³[3]⁴[4]. 🐍✨
+
+
+Banking Examples:
+
+```python
+# Suppose we have two bank accounts with different balances
+account_balance_1 = 100  # This is an integer
+account_balance_2 = 150  # This is also an integer
+
+# We want to calculate the average balance between the two accounts
+# If we do not cast to float, the division will perform integer division in Python 2.x
+# or floor division in Python 3.x when using the '//' operator
+average_balance = (account_balance_1 + account_balance_2) // 2
+
+# The result will be an integer, which is not what we want for an average that could be a decimal
+print("Average balance (incorrect due to integer division):", average_balance)
+
+# To fix this, we should cast at least one of the operands to float before division
+correct_average_balance = (account_balance_1 + account_balance_2) / 2.0
+
+# Now the result will be a float, giving us the accurate average balance
+print("Average balance (correct with float division):", correct_average_balance)
+```
+
+In this example, if we don't cast to float before performing the division, the program will truncate the decimal part, resulting in an incorrect average balance calculation. This can lead to significant discrepancies in financial reports and user account balances. Always ensure that financial calculations are performed with floating-point numbers to maintain precision.
+
+ integer to a float in Python:
+
+```python
+# Assume we have a function to calculate interest on the provided balance and interest rate
+def calculate_interest(balance, interest_rate):
+    # If balance or interest_rate is not cast to float, the result might be incorrect
+    return balance * interest_rate // 100
+
+# Customer's account balance and the bank's interest rate
+account_balance = 1000  # In dollars, as an integer
+annual_interest_rate = 1.5  # Annual interest rate as a float
+
+# Calculate the expected interest for one year
+expected_interest = calculate_interest(account_balance, annual_interest_rate)
+
+# The result will be incorrect due to integer division
+print("Expected interest (incorrect due to integer division):", expected_interest)
+
+# Correcting the function by casting balance to float
+def calculate_correct_interest(balance, interest_rate):
+    return balance * interest_rate / 100
+
+# Calculate the correct interest for one year
+correct_interest = calculate_correct_interest(account_balance, annual_interest_rate)
+
+# Now the result will be correct
+print("Expected interest (correct with float division):", correct_interest)
+```
+
+In this example, the `calculate_interest` function does not cast the `balance` to a float, which leads to integer division and an incorrect calculation of interest. This can cause a significant defect in a banking application where precise financial calculations are essential. The corrected function, `calculate_correct_interest`, properly casts the `balance` to a float, ensuring that the division is done correctly and the expected interest is calculated accurately.
